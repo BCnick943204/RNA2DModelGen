@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/RNABasePics">
+        <file>images/RNA_A_Base.png</file>
+        <file>images/RNA_C_Base.png</file>
+        <file>images/RNA_G_Base.png</file>
+        <file>images/RNA_U_Base.png</file>
+    </qresource>
+    <qresource prefix="/lib">
+        <file>ViennaRNA/bin/RNAfold</file>
+        <file>ViennaRNA/bin/RNAplot</file>
+    </qresource>
+    <qresource prefix="/input">
+        <file>sequences/seq.txt</file>
+    </qresource>
+</RCC>
