@@ -1,4 +1,4 @@
-QT       += core gui svg
+QT       += core gui svg widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -8,12 +8,14 @@ SOURCES += \
     base.cpp \
     graphicswindow.cpp \
     main.cpp \
-    rnagraphicsview.cpp
+    rnagraphicsview.cpp \
+    rnamodelgen.cpp
 
 HEADERS += \
     base.h \
     graphicswindow.h \
-    rnagraphicsview.h
+    rnagraphicsview.h \
+    rnamodelgen.h
 
 RESOURCES += \
     res.qrc
