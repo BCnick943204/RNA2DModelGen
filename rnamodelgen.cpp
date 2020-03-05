@@ -1,6 +1,7 @@
 #include "rnamodelgen.h"
 
 #include <QTemporaryFile>
+#include <QSaveFile>
 #include <QTextStream>
 #include <QDebug>
 #include <QDir>
@@ -26,6 +27,7 @@ void RNAModelGen::generate2DModel(QString rnaSequence){
 
     // generate temp file for RNAFold input
     QTemporaryFile *seq = new QTemporaryFile();
+    seq->setAutoRemove(false);
 
     if(!seq->open()){
         qInfo() << "error opening temp file";
@@ -46,19 +48,30 @@ void RNAModelGen::generate2DModel(QString rnaSequence){
 
     qInfo() << rnaFoldArgs;
 
-    // start RNAfold
+   // start RNAfold;
     rnaFold->setProgram(rnaFoldCmd);
     rnaFold->setArguments(rnaFoldArgs);
-    rnaFold->setStandardOutputProcess(rnaPlot);     // pipe stdout of rnaFold to rnaPlot
+    rnaFold->setStandardOutputProcess(rnaPlot);
     rnaFold->start(QIODevice::ReadWrite);
     rnaFold->waitForFinished();
+
+    // generate unique file to save .svg as
+
+    QFile *rnaDotBracket = new QFile("/tmp/RNA2DGraphics.FRVAlH");
+    rnaDotBracket->open(QIODevice::ReadWrite);
+    if(!rnaDotBracket->isOpen()){
+        qInfo() << "NOT OPEN";
+        qInfo() << rnaDotBracket->errorString();
+    }
+    QByteArray *rawFile = new QByteArray(rnaDotBracket->readAll());
 
 
     // start RNAplot
     rnaPlot->setProgram(rnaPlotCmd);
     rnaPlot->setArguments(rnaPlotArgs);
-    rnaPlot->start();
-
+    rnaPlot->setStandardOutputFile("myTest.svg");
+    rnaPlot->start(QIODevice::ReadWrite);
+    rnaPlot->write(*rawFile);
     rnaPlot->waitForFinished();
 
 

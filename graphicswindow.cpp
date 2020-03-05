@@ -21,7 +21,7 @@ GraphicsWindow::GraphicsWindow()
 
 
     RNAModelGen *rnaGen = new RNAModelGen();
-    rnaGen->generate2DModel("AGAGAGAGUUUUUUUUGUGUGUGUGUG");
+    rnaGen->generate2DModel("AGAGAGAGCGCUSGCGCGSICGUGUGUGUGUG");
 
 
 
